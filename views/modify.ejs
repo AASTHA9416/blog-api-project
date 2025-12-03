@@ -4,37 +4,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edit Blog</title>
+  <title><%= heading %> - My Blog</title>
   <link rel="stylesheet" href="/styles/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-  <div class="container">
-    <h1>
-      <%= heading %>
-    </h1>
+  <div class="hero-section small">
+    <div class="hero-content">
+      <h1><i class="fas fa-pen-fancy"></i> <%= heading %></h1>
+      <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    </div>
+  </div>
 
-    <% if (locals.post) { %>
-      <form id="editForm" method="post" action="/api/posts/<%=post.id%>">
-        <input type="text" name="title" value="<%=post.title %>">
-        <textarea name="content" rows="10"><%=post.content %></textarea>
-        <input type="text" name="author" value="<%=post.author %>">
-        <button class="full-width" type="submit">
-          <%= submit %>
-        </button>
-      </form>
-      <% } else {%>
-        <form id="newPostForm" method="post" action="/api/posts">
-          <input type="text" name="title" placeholder="Title" required>
-          <textarea name="content" placeholder="Content" required rows="10"></textarea>
-          <input type="text" name="author" placeholder="Author" required>
-          <button class="full-width" type="submit">
-            <%= submit %>
+  <div class="container">
+    <div class="form-card">
+      <% if (locals.post) { %>
+        <form id="editForm" method="post" action="/api/posts/<%=post.id%>">
+          <div class="form-group">
+            <label for="title"><i class="fas fa-heading"></i> Post Title</label>
+            <input type="text" id="title" name="title" value="<%=post.title %>" placeholder="Enter an engaging title..." required>
+          </div>
+          
+          <div class="form-group">
+            <label for="content"><i class="fas fa-paragraph"></i> Content</label>
+            <textarea id="content" name="content" rows="12" placeholder="Share your thoughts..." required><%=post.content %></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="author"><i class="fas fa-user-edit"></i> Author</label>
+            <input type="text" id="author" name="author" value="<%=post.author %>" placeholder="Your name..." required>
+          </div>
+          
+          <button class="btn-submit" type="submit">
+            <i class="fas fa-save"></i> <%= submit %>
           </button>
         </form>
-        <% } %>
-
+      <% } else {%>
+        <form id="newPostForm" method="post" action="/api/posts">
+          <div class="form-group">
+            <label for="title"><i class="fas fa-heading"></i> Post Title</label>
+            <input type="text" id="title" name="title" placeholder="Enter an engaging title..." required>
+          </div>
+          
+          <div class="form-group">
+            <label for="content"><i class="fas fa-paragraph"></i> Content</label>
+            <textarea id="content" name="content" placeholder="Share your thoughts..." required rows="12"></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="author"><i class="fas fa-user-edit"></i> Author</label>
+            <input type="text" id="author" name="author" placeholder="Your name..." required>
+          </div>
+          
+          <button class="btn-submit" type="submit">
+            <i class="fas fa-paper-plane"></i> <%= submit %>
+          </button>
+        </form>
+      <% } %>
+    </div>
   </div>
+
+  <footer class="footer">
+    <p>&copy; 2025 My Blog. Built with <i class="fas fa-heart"></i> and Node.js</p>
+  </footer>
+
 </body>
 
 </html>
